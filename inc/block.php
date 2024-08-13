@@ -46,6 +46,7 @@ function share_openly_dynamic_block( $block_content, $block ) {
     $processor = new WP_HTML_Tag_Processor( $block_content );
     if ( $processor->next_tag( 'img' ) ) {
 		$processor->set_attribute( 'src', $logo_url );
+		$processor->set_attribute( 'loading', 'lazy' );
     }
     if ( $processor->next_tag( 'a' ) ) {
 		$processor->set_attribute( 'href', $share_url );
