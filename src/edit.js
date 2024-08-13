@@ -29,22 +29,32 @@ import './editor.scss';
  *
  * @return {Element} Element to render.
  */
-export default function Edit( {attributes, setAttributes, context: { postType, postId, queryId } }) {
+export default function Edit( {
+	attributes,
+	setAttributes,
+	context: { postType, postId, queryId },
+} ) {
 	const blockProps = useBlockProps( {
-        className: 'shareopenly',
-    } );
+		className: 'shareopenly',
+	} );
 
 	return (
 		<div { ...blockProps }>
-			<img src="https://shareopenly.org/images/logo.svg" alt="ShareOpenly logo" />&nbsp;
+			<img
+				src="https://shareopenly.org/images/logo.svg"
+				alt="ShareOpenly logo"
+			/>
+			&nbsp;
 			<RichText
-				tagName='a'
-				href='#'
+				tagName="a"
+				href="#"
 				value={ attributes.content }
-				onChange={ ( content ) => setAttributes( { content: content } ) }
-				identifier='content'
-				allowedFormats={[]}
-				disableLineBreaks={true}
+				onChange={ ( content ) =>
+					setAttributes( { content: content } )
+				}
+				identifier="content"
+				allowedFormats={ [] }
+				disableLineBreaks={ true }
 			/>
 		</div>
 	);

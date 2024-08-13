@@ -18,7 +18,7 @@
 			"type": "string",
 			"source": "html",
 			"selector": "a",
-			"default": ["Share this post on social media."]
+			"default": [ "Share this post on social media." ]
 		}
 	},
 	"textdomain": "shareopenly",

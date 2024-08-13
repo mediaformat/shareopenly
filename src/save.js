@@ -15,14 +15,18 @@ import { useBlockProps, RichText } from '@wordpress/block-editor';
  *
  * @return {Element} Element to render.
  */
-export default function save({attributes}) {
+export default function save( { attributes } ) {
 	const blockProps = useBlockProps.save();
 	return (
 		<div { ...blockProps }>
-			<img src="https://shareopenly.org/images/logo.svg" alt="ShareOpenly logo" />&nbsp;
+			<img
+				src="https://shareopenly.org/images/logo.svg"
+				alt="ShareOpenly logo"
+			/>
+			&nbsp;
 			<RichText.Content
-				tagName='a'
-				href='#'
+				tagName="a"
+				href="#"
 				value={ attributes.content }
 			/>
 		</div>
