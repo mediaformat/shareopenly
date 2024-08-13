@@ -6,6 +6,8 @@
  */
 import { useBlockProps, RichText } from '@wordpress/block-editor';
 
+import logo from '../assets/icon.svg';
+
 /**
  * The edit function describes the structure of your block in the context of the
  * editor. This represents what the editor will render when the block is used.
@@ -22,12 +24,16 @@ export default function Edit( { attributes, setAttributes } ) {
 	const blockProps = useBlockProps( {
 		className: 'shareopenly',
 	} );
+	const logoAlt = 'ShareOpenly logo';
 
 	return (
 		<div { ...blockProps }>
 			<img
-				src="https://shareopenly.org/images/logo.svg"
-				alt="ShareOpenly logo"
+				src={ logo }
+				alt={ logoAlt }
+				decoding="async"
+				width="18"
+				height="18"
 			/>
 			&nbsp;
 			<RichText

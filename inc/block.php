@@ -31,6 +31,8 @@ add_action( 'init', 'shareopenly_share_openly_block_init' );
  */
 function share_openly_dynamic_block( $block_content, $block ) {
 
+	$logo_url = "https://shareopenly.org/images/logo.svg";
+
 	// Build the share_url query params
 	global $wp, $post;
 	$title = rawurlencode( esc_html( get_the_title() ) );
@@ -42,6 +44,9 @@ function share_openly_dynamic_block( $block_content, $block ) {
 
     // Set the Share URL to the block content using the HTML API
     $processor = new WP_HTML_Tag_Processor( $block_content );
+    if ( $processor->next_tag( 'img' ) ) {
+		$processor->set_attribute( 'src', $logo_url );
+    }
     if ( $processor->next_tag( 'a' ) ) {
 		$processor->set_attribute( 'href', $share_url );
     }
