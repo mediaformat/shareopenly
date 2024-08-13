@@ -1,11 +1,4 @@
 /**
- * Retrieves the translation of text.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
- */
-import { __ } from '@wordpress/i18n';
-
-/**
  * React hook that is used to mark the block wrapper element.
  * It provides all the necessary props like the class name.
  *
@@ -27,13 +20,13 @@ import './editor.scss';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
  *
+ * @param {Object} props
+ * @param {*}      props.attributes
+ * @param {*}      props.setAttributes
+ *
  * @return {Element} Element to render.
  */
-export default function Edit( {
-	attributes,
-	setAttributes,
-	context: { postType, postId, queryId },
-} ) {
+export default function Edit( { attributes, setAttributes } ) {
 	const blockProps = useBlockProps( {
 		className: 'shareopenly',
 	} );
@@ -49,9 +42,7 @@ export default function Edit( {
 				tagName="a"
 				href="#"
 				value={ attributes.content }
-				onChange={ ( content ) =>
-					setAttributes( { content: content } )
-				}
+				onChange={ ( content ) => setAttributes( { content } ) }
 				identifier="content"
 				allowedFormats={ [] }
 				disableLineBreaks={ true }
