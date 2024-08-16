@@ -32,11 +32,11 @@ add_action( 'init', 'shareopenly_share_openly_block_init' );
 /**
  * Renders the Block Contents adding the sharing link.
  *
- * @param mixed $block_content The static block content
+ * @param array $attributes The block attributes
+ * @param string $content The block content
+ * @return string $content The updated block content
  *
- * @return mixed $block_content The updated block content
- *
- * @see https://developer.wordpress.org/reference/hooks/render_block_this-name/
+ * @see https://developer.wordpress.org/reference/classes/wp_block_type/render/
  */
 function share_openly_dynamic_block( $attributes, $content ) {
 
