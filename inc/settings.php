@@ -47,6 +47,35 @@ function shareopenly_get_settings() {
 }
 
 /**
+ * Get the post types
+ *
+ * @return   array     Post types array.
+ */
+function shareopenly_get_post_types() {
+
+	// Get the saved post types.
+	$support_post_types = get_option( 'shareopenly_type', array( 'post' ) ) ? get_option( 'shareopenly_type', array( 'post' ) ) : array();
+
+	if ( is_array( $support_post_types ) ) {
+		$shareopenly_post_types = $support_post_types;
+	} else {
+		switch( $support_post_types ) {
+			case 'post':
+				$shareopenly_post_types = array( 'post' );
+				break;
+			case 'page':
+				$shareopenly_post_types = array( 'page' );
+				break;
+			case 'postpage':
+				$shareopenly_post_types = array( 'post', 'page' );
+				break;
+		}
+	}
+
+	return $shareopenly_post_types;
+}
+
+/**
  * Add to settings
  *
  * Add a field to the general settings screen for assorted options
