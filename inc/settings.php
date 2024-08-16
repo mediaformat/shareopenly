@@ -22,12 +22,9 @@ function shareopenly_get_settings() {
 
 	$settings = array();
 
-	// Get the post type.
+	// Get the post types.
 
-	$settings['type'] = esc_html( get_option( 'shareopenly_type' ) );
-	if ( ! $settings['type'] ) {
-		$settings['type'] = 'post';
-	}
+	$settings['type'] = shareopenly_get_post_types();
 
 	// Get the share text.
 
