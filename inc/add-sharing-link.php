@@ -22,29 +22,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 function shareopenly_add_to_content( $content ) {
 
 	$settings = shareopenly_get_settings();
+	$support_post_types = $settings['type'];
 
-	// Work out if posts or pages are needed.
+	// Output link on selected post types
+	foreach( $support_post_types as $post_type ) {
+		if ( is_singular( $post_type ) ) {
+			$title = rawurlencode( esc_html( get_the_title() ) );
 
-	$post = false;
-	$page = false;
+			global $wp;
+			$url = home_url( add_query_arg( array(), $wp->request ) );
 
-	if ( 'post' === $settings['type'] || 'postpage' === $settings['type'] ) {
-		$post = true;
-	}
-	if ( 'page' === $settings['type'] || 'postpage' === $settings['type'] ) {
-		$page = true;
-	}
-
-	// Now generate the shared output if we're on the right output type.
-
-	if ( ( is_single() && $post ) || ( is_page() && $page ) ) {
-
-		$title = rawurlencode( esc_html( get_the_title() ) );
-
-		global $wp;
-		$url = home_url( add_query_arg( array(), $wp->request ) );
-
-		$content .= '<div class="shareopenly"><img src="https://shareopenly.org/images/logo.svg" alt="ShareOpenly logo">&nbsp;<a href="https://shareopenly.org/share/?url=' . $url . '&text=' . $title . '">' . $settings['text'] . '</a></div>';
+			$content .= '<div class="shareopenly"><img src="https://shareopenly.org/images/logo.svg" alt="ShareOpenly logo">&nbsp;<a href="https://shareopenly.org/share/?url=' . $url . '&text=' . $title . '">' . $settings['text'] . '</a></div>';
+		}
 	}
 
 	return $content;
