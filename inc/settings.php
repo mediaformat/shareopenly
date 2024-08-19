@@ -22,12 +22,9 @@ function shareopenly_get_settings() {
 
 	$settings = array();
 
-	// Get the post type.
+	// Get the post types.
 
-	$settings['type'] = esc_html( get_option( 'shareopenly_type' ) );
-	if ( ! $settings['type'] ) {
-		$settings['type'] = 'post';
-	}
+	$settings['type'] = shareopenly_get_post_types();
 
 	// Get the share text.
 
@@ -44,6 +41,35 @@ function shareopenly_get_settings() {
 	}
 
 	return $settings;
+}
+
+/**
+ * Get the post types
+ *
+ * @return   array     Post types array.
+ */
+function shareopenly_get_post_types() {
+
+	// Get the saved post types.
+	$support_post_types = get_option( 'shareopenly_type', array( 'post' ) ) ? get_option( 'shareopenly_type', array( 'post' ) ) : array();
+
+	if ( is_array( $support_post_types ) ) {
+		$shareopenly_post_types = $support_post_types;
+	} else {
+		switch( $support_post_types ) {
+			case 'post':
+				$shareopenly_post_types = array( 'post' );
+				break;
+			case 'page':
+				$shareopenly_post_types = array( 'page' );
+				break;
+			case 'postpage':
+				$shareopenly_post_types = array( 'post', 'page' );
+				break;
+		}
+	}
+
+	return $shareopenly_post_types;
 }
 
 /**
@@ -83,18 +109,24 @@ function shareopenly_settings_section() {
 /**
  * Type setting callback
  *
- * Output the settings field for whether to show the sharing link on posts and/or pages.
+ * Output the settings fields for selecting on which post types to display sharing link.
  */
 function shareopenly_type_callback() {
 
-	$options = shareopenly_get_settings();
-	$type    = $options['type'];
-
-	echo '<select name="shareopenly_type">';
-	echo '<option ' . selected( 'post', $type, false ) . ' value="post">' . esc_html__( 'Posts', 'shareopesettnly' ) . '</option>';
-	echo '<option ' . selected( 'page', $type, false ) . ' value="page">' . esc_html__( 'Pages', 'shareopenly' ) . '</option>';
-	echo '<option ' . selected( 'postpage', $type, false ) . ' value="postpage">' . esc_html__( 'Posts & Pages', 'shareopenly' ) . '</option>';
-	echo '</select>';
+	$support_post_types = shareopenly_get_post_types();
+	$post_types = get_post_types( array( 'public' => true ), 'objects' );
+	?>
+	<fieldset>
+		<ul>
+		<?php foreach ( $post_types as $post_type ) : ?>
+			<li>
+				<input type="checkbox" id="shareopenly_type_<?php echo esc_attr( $post_type->name ); ?>" name="shareopenly_type[]" value="<?php echo esc_attr( $post_type->name ); ?>" <?php echo checked( in_array( $post_type->name, $support_post_types, true ) ); ?> />
+				<label for="shareopenly_type_<?php echo esc_attr( $post_type->name ); ?>"><?php echo esc_html( $post_type->label ); ?></label>
+			</li>
+		<?php endforeach; ?>
+		</ul>
+	</fieldset>
+	<?php
 }
 
 /**
