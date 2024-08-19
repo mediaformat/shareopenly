@@ -56,7 +56,7 @@ function shareopenly_get_post_types() {
 	if ( is_array( $support_post_types ) ) {
 		$shareopenly_post_types = $support_post_types;
 	} else {
-		switch( $support_post_types ) {
+		switch ( $support_post_types ) {
 			case 'post':
 				$shareopenly_post_types = array( 'post' );
 				break;
@@ -114,7 +114,7 @@ function shareopenly_settings_section() {
 function shareopenly_type_callback() {
 
 	$support_post_types = shareopenly_get_post_types();
-	$post_types = get_post_types( array( 'public' => true ), 'objects' );
+	$post_types         = get_post_types( array( 'public' => true ), 'objects' );
 	?>
 	<fieldset>
 		<ul>

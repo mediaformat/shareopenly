@@ -1,11 +1,11 @@
 === ShareOpenly ===
-Contributors: dartiss, jeherve
+Contributors: dartiss, jeherve, mediaformat
 Donate link: https://artiss.blog/donate
 Tags: share, sharing, social media, mastodon, threads
 Requires at least: 4.6
-Tested up to: 6.5
+Tested up to: 6.6
 Requires PHP: 8.0
-Stable tag: 1.0.1
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 README revision: 1.0
@@ -65,6 +65,9 @@ The special keyword `{text}` will be replaced with the URL and share text.
 
 I use semantic versioning, with the first release being 1.0
 
+= 1.1 =
+* Enhancement: Custom post types added, thanks to [MediaFormat](https://github.com/mediaformat)
+
 = 1.0.1 =
 * Enhancement: Updated the sharing icon
 * Enhancement: Updated the settings link in the plugin meta so it goes straight to the ShareOpenly settings (thanks to Jeremy Herve for this change)
@@ -75,5 +78,5 @@ I use semantic versioning, with the first release being 1.0
 
 == Upgrade Notice ==
 
-= 1.0.1 =
-* Assorted minor enhancements
+= 1.1 =
+* Now with custom post types!

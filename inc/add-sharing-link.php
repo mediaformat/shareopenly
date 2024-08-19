@@ -21,11 +21,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function shareopenly_add_to_content( $content ) {
 
-	$settings = shareopenly_get_settings();
+	$settings           = shareopenly_get_settings();
 	$support_post_types = $settings['type'];
 
-	// Output link on selected post types
-	foreach( $support_post_types as $post_type ) {
+	// Output link on selected post types.
+
+	foreach ( $support_post_types as $post_type ) {
 		if ( is_singular( $post_type ) ) {
 			$title = rawurlencode( esc_html( get_the_title() ) );
 
