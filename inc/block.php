@@ -20,16 +20,25 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
 function shareopenly_share_openly_block_init() {
-	register_block_type( __DIR__ . '/../build' );
+	register_block_type(
+		__DIR__ . '/../build',
+		array(
+			'render_callback' => 'share_openly_dynamic_block',
+		)
+	);
 }
 add_action( 'init', 'shareopenly_share_openly_block_init' );
 
 /**
- * Filters the Block Contents to add the sharing link.
+ * Renders the Block Contents adding the sharing link.
  *
- * @see https://developer.wordpress.org/reference/hooks/render_block_this-name/
+ * @param array $attributes The block attributes
+ * @param string $content The block content
+ * @return string $content The updated block content
+ *
+ * @see https://developer.wordpress.org/reference/classes/wp_block_type/render/
  */
-function share_openly_dynamic_block( $block_content, $block ) {
+function share_openly_dynamic_block( $attributes, $content ) {
 
 	$logo_url = "https://shareopenly.org/images/logo.svg";
 
@@ -43,7 +52,7 @@ function share_openly_dynamic_block( $block_content, $block ) {
 	), 'https://shareopenly.org/share/' );
 
     // Set the Share URL to the block content using the HTML API
-    $processor = new WP_HTML_Tag_Processor( $block_content );
+    $processor = new WP_HTML_Tag_Processor( $content );
     if ( $processor->next_tag( 'img' ) ) {
 		$processor->set_attribute( 'src', $logo_url );
 		$processor->set_attribute( 'loading', 'lazy' );
@@ -54,4 +63,3 @@ function share_openly_dynamic_block( $block_content, $block ) {
 
 	return $processor->get_updated_html();
 }
-add_filter( 'render_block_shareopenly/share-openly', 'share_openly_dynamic_block', 10, 2 );
