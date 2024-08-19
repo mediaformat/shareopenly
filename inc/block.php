@@ -51,15 +51,15 @@ function share_openly_dynamic_block( $attributes, $content ) {
 		'text' => $title,
 	), 'https://shareopenly.org/share/' );
 
-    // Set the Share URL to the block content using the HTML API
-    $processor = new WP_HTML_Tag_Processor( $content );
-    if ( $processor->next_tag( 'img' ) ) {
+	// Set the Share URL to the block content using the HTML API
+	$processor = new WP_HTML_Tag_Processor( $content );
+	if ( $processor->next_tag( 'img' ) ) {
 		$processor->set_attribute( 'src', $logo_url );
 		$processor->set_attribute( 'loading', 'lazy' );
-    }
-    if ( $processor->next_tag( 'a' ) ) {
+	}
+	if ( $processor->next_tag( 'a' ) ) {
 		$processor->set_attribute( 'href', $share_url );
-    }
+	}
 
 	return $processor->get_updated_html();
 }
